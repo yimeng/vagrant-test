@@ -1,0 +1,44 @@
+---
+- hosts: web
+  become: true
+  become_user: root
+  become_method: sudo
+  tasks:
+  - name: init yum repo
+    file:
+      path: /etc/yum.repos.d
+      state: absent
+  - name: copy yum repo to remote node
+    copy:
+      src: files/yum/jdjr.repo
+      dest: /etc/yum.repos.d/
+
+  - name: ensure docker is at the latest version
+    yum: pkg=docker-ce state=latest
+
+  - name: start docker service
+    systemd:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: install etcd
+    yum: pkg=etcd state=latest
+
+  - name: init yum repo
+    file:
+      path: /data
+      state: absent
+
+  - name: copy cfssl packages to guest host
+    copy:
+      src: ../k8s/cfssl
+      dest: /data
+
+  - name: change bin
+    file:
+      path: /data/cfssl/bin/
+      mode: 0755
+      recurse: true
+
+

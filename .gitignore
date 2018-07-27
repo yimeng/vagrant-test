@@ -1,0 +1,6 @@
+*.box
+.vagrant
+playbook.retry
+jdjr.repo
+k8s/cfssl/ca
+k8s/cfssl/bin
