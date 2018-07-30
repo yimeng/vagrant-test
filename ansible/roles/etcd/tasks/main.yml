@@ -1,0 +1,6 @@
+--- 
+- name: set etcd yum or copy etcd bin to path
+
+- name: set etcd conf
+
+- name: start etcd service

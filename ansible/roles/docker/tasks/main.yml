@@ -1,0 +1,11 @@
+---
+- name: set docker yum 
+
+- name: install docker on centos7
+
+- name: set docker conf
+
+- name: start docker services
+
+
+- 
